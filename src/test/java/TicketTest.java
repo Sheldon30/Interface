@@ -11,12 +11,35 @@ public class TicketTest {
 
 
     @Test
+    // Цена на билет меньше
     public void priceLess() {
         AviaSouls manager = new AviaSouls();
         manager.add(ticket1);
         manager.add(ticket2);
-        int expected = 1500;
+        int expected = 1;
         int actual = ticket1.compareTo(ticket2);
+        Assertions.assertEquals(expected,actual);
+
+    }
+    @Test
+    // Если цена на билет больше
+    public void priceMore() {
+        AviaSouls manager = new AviaSouls();
+        manager.add(ticket1);
+        manager.add(ticket2);
+        int expected = -1;
+        int actual = ticket2.compareTo(ticket1);
+        Assertions.assertEquals(expected,actual);
+
+    }
+    @Test
+    // Цены на билеты равны
+    public void priceEqual() {
+        AviaSouls manager = new AviaSouls();
+        manager.add(ticket3);
+        manager.add(ticket6);
+        int expected = 0;
+        int actual = ticket3.compareTo(ticket6);
         Assertions.assertEquals(expected,actual);
 
     }
@@ -33,7 +56,5 @@ public class TicketTest {
         Ticket[] actual = manager.search("Пенза", "Рязань");
         Assertions.assertArrayEquals(expected, actual);
     }
-
-
 
 }

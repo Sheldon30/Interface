@@ -57,7 +57,7 @@ public class Ticket implements Comparable<Ticket> {
             return -1;
         } else if (this.price > o.price) {
             return 1;
-        }else {
+        } else {
             return 0;
         }
     }

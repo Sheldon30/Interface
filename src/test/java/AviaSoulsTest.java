@@ -49,7 +49,7 @@ public class AviaSoulsTest {
     }
 
     @Test
-    //Сортировка по ценам
+    //Сортировка по ценам, находится несколько билетов.
     public void sortingTicket() {
         AviaSouls manager = new AviaSouls();
         manager.add(ticket1);
@@ -62,6 +62,7 @@ public class AviaSoulsTest {
         Ticket[] actual = manager.search("Пенза", "Рязань");
         Assertions.assertArrayEquals(expected, actual);
     }
+
 
     @Test
     //Время перелета меньше
@@ -118,6 +119,64 @@ public class AviaSoulsTest {
         TicketTimeComparator timeCompare = new TicketTimeComparator();
         Ticket[] expected = {ticket4, ticket3, ticket5};
         Ticket[] actual = manager.searchAndSortBy("Пенза", "Рязань", timeCompare);
+        Assertions.assertArrayEquals(expected, actual);
+    }
+    @Test
+    //Находится один билет (метод searchAndSortBy)
+    public void sortingOneTicketTime() {
+        AviaSouls manager = new AviaSouls();
+        manager.add(ticket1);
+        manager.add(ticket2);
+        manager.add(ticket3);
+        manager.add(ticket4);
+        manager.add(ticket5);
+        manager.add(ticket6);
+        TicketTimeComparator timeCompare = new TicketTimeComparator();
+        Ticket[] expected = {ticket1};
+        Ticket[] actual = manager.searchAndSortBy("Москва", "Самара", timeCompare);
+        Assertions.assertArrayEquals(expected, actual);
+    }
+    @Test
+    //Находится 0 билетов (метод searchAndSortBy)
+    public void searchOneTicketTime() {
+        AviaSouls manager = new AviaSouls();
+        manager.add(ticket1);
+        manager.add(ticket2);
+        manager.add(ticket3);
+        manager.add(ticket4);
+        manager.add(ticket5);
+        manager.add(ticket6);
+        TicketTimeComparator timeCompare = new TicketTimeComparator();
+        Ticket[] expected = {};
+        Ticket[] actual = manager.searchAndSortBy("Нет результатов", "Нет результатов", timeCompare);
+        Assertions.assertArrayEquals(expected, actual);
+    }
+    @Test
+    //находится 1 билет.
+    public void searchTicket() {
+        AviaSouls manager = new AviaSouls();
+        manager.add(ticket1);
+        manager.add(ticket2);
+        manager.add(ticket3);
+        manager.add(ticket4);
+        manager.add(ticket5);
+        manager.add(ticket6);
+        Ticket[] expected = {ticket6};
+        Ticket[] actual = manager.search("Казань", "Москва");
+        Assertions.assertArrayEquals(expected, actual);
+    }
+    @Test
+    //находится 0 билетов.
+    public void searchNotTicket() {
+        AviaSouls manager = new AviaSouls();
+        manager.add(ticket1);
+        manager.add(ticket2);
+        manager.add(ticket3);
+        manager.add(ticket4);
+        manager.add(ticket5);
+        manager.add(ticket6);
+        Ticket[] expected = {};
+        Ticket[] actual = manager.search("Нет результатов", "Нет результатов");
         Assertions.assertArrayEquals(expected, actual);
     }
 

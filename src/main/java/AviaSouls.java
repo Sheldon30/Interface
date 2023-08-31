@@ -52,9 +52,6 @@ public class AviaSouls {
             }
         }
         Arrays.sort(result);
-        for (Ticket ticket : tickets) {
-
-        }
         return result;
     }
 
